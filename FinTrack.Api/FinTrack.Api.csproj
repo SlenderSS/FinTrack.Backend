@@ -16,6 +16,10 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="Configuration\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Helper\" />
+    <Folder Include="Repository\" />
   </ItemGroup>
 
 </Project>
