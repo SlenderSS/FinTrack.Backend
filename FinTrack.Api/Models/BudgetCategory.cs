@@ -10,6 +10,6 @@ public class BudgetCategory
     public int Id { get; set; }
     public string Title { get; set; }
 
-    public ICollection<Budget>? Budgets { get; set; }
+    public ICollection<Budget> Budgets { get; set; }
 }
 
