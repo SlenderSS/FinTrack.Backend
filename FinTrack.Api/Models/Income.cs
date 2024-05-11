@@ -2,20 +2,29 @@
 
 public class Income
 {
-    public Income(string title, decimal incomeVolume, DateTime incomeDate, IncomeCategory incomeCategory)
+    public Income(
+        string description, 
+        decimal incomeVolume, 
+        DateTime incomeDate,
+        Budget budget, 
+        IncomeCategory incomeCategory)
     {
-        Title = title;
+        Description = description;
         IncomeVolume = incomeVolume;
         IncomeDate = incomeDate;
+        Budget = budget;
         IncomeCategory = incomeCategory;
     }
 
-    public Guid Id { get; set; }
+    public int Id { get; set; }
+    public string Description { get; set; }
     public decimal IncomeVolume { get; set; }
-    public string Title { get; set; }
     public DateTime IncomeDate { get; set; }
 
-    public Guid IncomeCategoryId { get; set; }
+    public int IncomeCategoryId { get; set; }
     public IncomeCategory IncomeCategory { get; set; }
+
+    public int BudgetId { get; set; }
+    public Budget Budget{ get; set; }
 
 }

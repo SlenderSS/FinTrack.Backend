@@ -1,13 +1,12 @@
 ﻿namespace FinTrack.Models;
 
-public class IncomeCategory
+public class ExpenseCategory
 {
-    public IncomeCategory(string title)
+    public ExpenseCategory(string title)
     {
         Title = title;
     }
     public int Id { get; set; }
     public string Title { get; set; }
-
-    public ICollection<Income>? Incomes { get; set; }
+    public ICollection<Expense>? Expenses{ get; set; }
 }

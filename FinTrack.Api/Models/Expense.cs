@@ -1,21 +1,31 @@
-﻿using FinTrack.Models;
+﻿namespace FinTrack.Models;
 
-namespace FinTrack.DAL.MSSQL.Models
+public class Expense
 {
-    public class Expense
+    public Expense(
+        string description,
+        decimal expenseVolume,
+        DateTime expenseDate,
+        Budget budget, 
+        ExpenseCategory expenseCategory)
     {
-        public Expense()
-        {
-            
-        }
-
-        public Guid Id { get; set; }
-        public decimal ExpenseVolume { get; set; }
-        public DateTime ExpenseDate { get; set; }
-
-        public Guid ExpenceCategoryId { get; set; }
-        public ExpenceCategory ExpenceCategory { get; set; }
-
-
+        Description = description;
+        ExpenseVolume = expenseVolume;
+        ExpenseDate = expenseDate;
+        Budget = budget;
+        ExpenseCategory = expenseCategory;
     }
+
+    public int Id { get; set; }
+    public string Description { get; set; }
+    public decimal ExpenseVolume { get; set; }
+    public DateTime ExpenseDate { get; set; }
+
+    public int BudgetId { get; set; }
+    public Budget Budget { get; set; }
+
+    public int ExpenceCategoryId { get; set; }
+    public ExpenseCategory ExpenseCategory { get; set; }
+
+
 }

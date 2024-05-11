@@ -1,6 +1,10 @@
-﻿namespace FinTrack.Api.Data
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace FinTrack.Api.Data
 {
-    public class DataContext
+    public class DataContext(DbContextOptions<DataContext> options) : DbContext(options)
     {
+
+
     }
 }
