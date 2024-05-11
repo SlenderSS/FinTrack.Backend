@@ -13,12 +13,17 @@ public class IncomeConfiguration : IEntityTypeConfiguration<Income>
         builder
             .HasKey(x => x.Id);
 
+        builder.Property(x => x.IncomeVolume)
+            .HasColumnType("decimal(18,4)");
+
         builder
             .HasOne(x => x.Budget)
-            .WithMany(x => x.Incomes);
+            .WithMany(x => x.Incomes)
+            .HasForeignKey(x => x.BudgetId);
 
         builder
             .HasOne(x => x.IncomeCategory)
-            .WithMany(x => x.Incomes);
+            .WithMany(x => x.Incomes)
+            .HasForeignKey(x => x.IncomeCategoryId);
     }
 }

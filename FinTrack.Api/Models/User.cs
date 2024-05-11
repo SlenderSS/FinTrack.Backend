@@ -13,9 +13,9 @@ public class User
     public string Login { get; set; }
     public string Password { get; set; }
     public ICollection<Budget>? Budgets { get; set; }
-    public ICollection<UserBudgetCategory>? UserBudgetCategories { get; set; }
-    public ICollection<UserExpenseCategory>? UserExpenseCategories { get; set; }
-    public ICollection<UserIncomeCategory>? UserIncomeCategories { get; set; }
+    public ICollection<BudgetCategory>? UserBudgetCategories { get; set; }
+    public ICollection<ExpenseCategory>? UserExpenseCategories { get; set; }
+    public ICollection<IncomeCategory>? UserIncomeCategories { get; set; }
 
 
 }

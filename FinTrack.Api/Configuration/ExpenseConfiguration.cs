@@ -13,8 +13,12 @@ public class ExpenseConfiguration : IEntityTypeConfiguration<Expense>
         builder
             .HasKey(x => x.Id);
 
+        builder.Property(x => x.ExpenseVolume)
+            .HasColumnType("decimal(18,4)");
+
         builder
             .HasOne(x => x.Budget)
-            .WithMany(x => x.Expences);
+            .WithMany(x => x.Expences)
+            .HasForeignKey(x => x.BudgetId);
     }
 }

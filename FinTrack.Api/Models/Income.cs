@@ -2,16 +2,21 @@
 
 public class Income
 {
+    public Income(string description,
+        decimal incomeVolume,
+        DateTime incomeDate)
+    {
+        Description = description;
+        IncomeVolume = incomeVolume;
+        IncomeDate = incomeDate;
+    }
     public Income(
         string description, 
         decimal incomeVolume, 
         DateTime incomeDate,
         Budget budget, 
-        IncomeCategory incomeCategory)
+        IncomeCategory incomeCategory) : this(description, incomeVolume, incomeDate)
     {
-        Description = description;
-        IncomeVolume = incomeVolume;
-        IncomeDate = incomeDate;
         Budget = budget;
         IncomeCategory = incomeCategory;
     }

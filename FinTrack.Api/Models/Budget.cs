@@ -3,10 +3,20 @@ namespace FinTrack.Models;
 
 public class Budget
 {
-    public Budget(string title, decimal amountOfMoney, User user, BudgetCategory budgetCategory, Currency currency)
+    public Budget(string title,
+        decimal amountOfMoney)
     {
         Title = title;
         AmountOfMoney = amountOfMoney;
+    }
+    public Budget(
+        string title, 
+        decimal amountOfMoney, 
+        User user, 
+        BudgetCategory budgetCategory, 
+        Currency currency) : this(title, amountOfMoney)
+    {
+        
         User = user;
         BudgetCategory = budgetCategory;
         Currency = currency;

@@ -1,4 +1,5 @@
-﻿using FinTrack.Models;
+﻿using FinTrack.Api.Configuration;
+using FinTrack.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinTrack.Api.Data
@@ -13,15 +14,26 @@ namespace FinTrack.Api.Data
         public DbSet<Income> Incomes { get; set; }
         public DbSet<IncomeCategory> IncomeCategories { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<UserBudgetCategory> UserBudgetCategories { get; set; }
-        public DbSet<UserExpenseCategory> UserExpenseCategories { get; set; }
-        public DbSet<UserIncomeCategory> UserIncomeCategories { get; set; }
+        //public DbSet<UserBudgetCategory> UserBudgetCategories { get; set; }
+        //public DbSet<UserExpenseCategory> UserExpenseCategories { get; set; }
+        //public DbSet<UserIncomeCategory> UserIncomeCategories { get; set; }
 
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnConfiguring(optionsBuilder);
-        }
+            modelBuilder.ApplyConfiguration(new BudgetCategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new BudgetConfiguration());
+            modelBuilder.ApplyConfiguration(new CurrencyConfiguration());
+            modelBuilder.ApplyConfiguration(new ExpenseConfiguration());
+            modelBuilder.ApplyConfiguration(new ExpenseCategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new IncomeCategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new IncomeConfiguration());
+            modelBuilder.ApplyConfiguration(new IncomeCategoryConfiguration());
+            //modelBuilder.ApplyConfiguration(new UserBudgetCategoryConfiguration());
+            //modelBuilder.ApplyConfiguration(new UserExpenseCategoryConfiguration());
+            //modelBuilder.ApplyConfiguration(new UserIncomeCategoryConfiguration());
 
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

@@ -2,16 +2,22 @@
 
 public class Expense
 {
-    public Expense(
-        string description,
+    public Expense(string description,
         decimal expenseVolume,
-        DateTime expenseDate,
-        Budget budget, 
-        ExpenseCategory expenseCategory)
+        DateTime expenseDate)
     {
         Description = description;
         ExpenseVolume = expenseVolume;
         ExpenseDate = expenseDate;
+    }
+    public Expense(
+        string description,
+        decimal expenseVolume,
+        DateTime expenseDate,
+        Budget budget,
+        ExpenseCategory expenseCategory) : this( description, expenseVolume, expenseDate)
+    {
+        
         Budget = budget;
         ExpenseCategory = expenseCategory;
     }
