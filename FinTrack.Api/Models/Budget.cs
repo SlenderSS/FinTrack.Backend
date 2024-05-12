@@ -1,28 +1,27 @@
 ﻿
+using FinTrack.Api.Models.Base;
+
 namespace FinTrack.Models;
 
-public class Budget
+public class Budget : NamedEntity
 {
-    public Budget(string title,
-        decimal amountOfMoney)
-    {
-        Title = title;
-        AmountOfMoney = amountOfMoney;
-    }
-    public Budget(
-        string title, 
-        decimal amountOfMoney, 
-        User user, 
-        BudgetCategory budgetCategory, 
-        Currency currency) : this(title, amountOfMoney)
-    {
+    //private Budget(string title,
+    //    decimal amountOfMoney) : base(title)
+    //{
+    //    AmountOfMoney = amountOfMoney;
+    //}
+    //public Budget(
+    //    string title, 
+    //    decimal amountOfMoney, 
+    //    User user, 
+    //    BudgetCategory budgetCategory, 
+    //    Currency currency) : this(title, amountOfMoney)
+    //{
         
-        User = user;
-        BudgetCategory = budgetCategory;
-        Currency = currency;
-    }
-    public int Id { get; set; } 
-    public string Title { get; set; }
+    //    User = user;
+    //    BudgetCategory = budgetCategory;
+    //    Currency = currency;
+    //}
 
     public decimal AmountOfMoney { get; set; }
 

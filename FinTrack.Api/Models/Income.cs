@@ -1,27 +1,27 @@
-﻿namespace FinTrack.Models;
+﻿using FinTrack.Api.Models.Base;
 
-public class Income
+namespace FinTrack.Models;
+public class Income : Entity
 {
-    public Income(string description,
-        decimal incomeVolume,
-        DateTime incomeDate)
-    {
-        Description = description;
-        IncomeVolume = incomeVolume;
-        IncomeDate = incomeDate;
-    }
-    public Income(
-        string description, 
-        decimal incomeVolume, 
-        DateTime incomeDate,
-        Budget budget, 
-        IncomeCategory incomeCategory) : this(description, incomeVolume, incomeDate)
-    {
-        Budget = budget;
-        IncomeCategory = incomeCategory;
-    }
+    //private Income(string description,
+    //    decimal incomeVolume,
+    //    DateTime incomeDate)
+    //{
+    //    Description = description;
+    //    IncomeVolume = incomeVolume;
+    //    IncomeDate = incomeDate;
+    //}
+    //public Income(
+    //    string description, 
+    //    decimal incomeVolume, 
+    //    DateTime incomeDate,
+    //    Budget budget, 
+    //    IncomeCategory incomeCategory) : this(description, incomeVolume, incomeDate)
+    //{
+    //    Budget = budget;
+    //    IncomeCategory = incomeCategory;
+    //}
 
-    public int Id { get; set; }
     public string Description { get; set; }
     public decimal IncomeVolume { get; set; }
     public DateTime IncomeDate { get; set; }

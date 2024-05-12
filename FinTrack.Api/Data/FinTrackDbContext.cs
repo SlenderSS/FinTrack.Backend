@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FinTrack.Api.Data
 {
-    public class DataContext(DbContextOptions<DataContext> options) : DbContext(options)
+    public class FinTrackDbContext(DbContextOptions<FinTrackDbContext> options) : DbContext(options)
     {
         public DbSet<Budget> Budgets{ get; set; }
         public DbSet<BudgetCategory> BudgetCategories { get; set; }

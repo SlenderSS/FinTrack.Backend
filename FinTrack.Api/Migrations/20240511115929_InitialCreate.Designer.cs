@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FinTrack.Api.Migrations
 {
-    [DbContext(typeof(DataContext))]
+    [DbContext(typeof(FinTrackDbContext))]
     [Migration("20240511115929_InitialCreate")]
     partial class InitialCreate
     {

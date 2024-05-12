@@ -1,13 +1,12 @@
-﻿namespace FinTrack.Models;
+﻿using FinTrack.Api.Models.Base;
 
-public class ExpenseCategory
-{
-    public ExpenseCategory(string title)
-    {
-        Title = title;
-    }
-    public int Id { get; set; }
-    public string Title { get; set; }
+namespace FinTrack.Models;
+
+public class ExpenseCategory : NamedEntity
+{ 
+    //public ExpenseCategory(string title) : base(title)
+    //{
+    //}
 
     public int? UserId { get; set; }
     public User? User { get; set; }

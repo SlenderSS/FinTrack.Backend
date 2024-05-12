@@ -1,15 +1,14 @@
-﻿namespace FinTrack.Models;
+﻿using FinTrack.Api.Models.Base;
 
-public class User
+namespace FinTrack.Models;
+
+public class User : NamedEntity
 {
-    public User(string userName, string login, string password)
-    {
-        UserName = userName;
-        Login = login;
-        Password = password;
-    }
-    public int Id { get; set; }
-    public string UserName { get; set; }
+    //public User(string userName, string login, string password) : base(userName)
+    //{
+    //    Login = login;
+    //    Password = password;
+    //}
     public string Login { get; set; }
     public string Password { get; set; }
     public ICollection<Budget>? Budgets { get; set; }
