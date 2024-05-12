@@ -2,12 +2,6 @@
 {
     public class NamedEntity : Entity
     {
-
-        //public NamedEntity(string title)
-        //{
-        //    Name = title;
-        //}
-
-        public string Name { get; set; }
+        public required string Name { get; set; }
     }
 }
