@@ -1,4 +1,5 @@
 using FinTrack.Api.Data;
+using FinTrack.Api.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,10 @@ builder.Services.AddDbContext<FinTrackDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("MSSQL"));
 });
+
+builder.Services.AddRepositoriesInDb();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
