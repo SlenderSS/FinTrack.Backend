@@ -10,5 +10,6 @@
         Task<bool> DeleteAsync(T obj);
         Task<bool> IsItemExists(string name);
         Task<bool> SaveAsync();
+        Task<ICollection<T>> GetListAsync(object obj);
     }
 }

@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FinTrack.Api.Repository.Implementations
 {
-    public class DbRepository<T> : IRepository<T> where T : NamedEntity
+    public abstract class DbRepository<T> : IRepository<T> where T : NamedEntity
     {
         protected readonly FinTrackDbContext _context;
         private readonly DbSet<T> _set;
 
-        public IQueryable<T> Items => _set;
+        public virtual IQueryable<T> Items => _set;
         public DbRepository(FinTrackDbContext context)
         {
             _context = context;
@@ -30,13 +30,14 @@ namespace FinTrack.Api.Repository.Implementations
 
         public async Task<T> GetItemAsync(int id)
         {
-            return await Items.Where(x => x.Id == id).FirstOrDefaultAsync();
+            return await Items.AsNoTracking().Where(x => x.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task<ICollection<T>> GetListAsync()
         {
-            return await Items.ToListAsync();
+            return await Items.AsNoTracking().ToListAsync();
         }
+        public abstract Task<ICollection<T>> GetListAsync(object obj);
 
         public async Task<bool> SaveAsync()
         {

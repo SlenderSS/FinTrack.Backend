@@ -7,13 +7,13 @@ namespace FinTrack.Api.Repository
     public static class RepositoryRegistrator
     {
         public static IServiceCollection AddRepositoriesInDb(this IServiceCollection services) => services
-            .AddTransient<IRepository<Budget>, DbRepository<Budget>>()
-            .AddTransient<IRepository<BudgetCategory>, DbRepository<BudgetCategory>>()
+            .AddTransient<IRepository<Budget>, BudgetRepository>()
+            .AddTransient<IRepository<BudgetCategory>, BudgetsCategoryRepository>()    
             .AddTransient<IRepository<Currency>, DbRepository<Currency>>()
-            .AddTransient<IRepository<Expense>, DbRepository<Expense>>()
-            .AddTransient<IRepository<ExpenseCategory>, DbRepository<ExpenseCategory>>()
-            .AddTransient<IRepository<Income>, DbRepository<Income>>()
-            .AddTransient<IRepository<IncomeCategory>, DbRepository<IncomeCategory>>()
+            .AddTransient<IRepository<Expense>, ExpensesRepository>()
+            .AddTransient<IRepository<ExpenseCategory>, ExpenseCategoriesRepository>()
+            .AddTransient<IRepository<Income>, IncomesRepository>()
+            .AddTransient<IRepository<IncomeCategory>, IncomeCategoriesRepository>()
             .AddTransient<IRepository<User>, DbRepository<User>>();
     }
 }
