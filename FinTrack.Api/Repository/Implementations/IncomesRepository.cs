@@ -15,7 +15,7 @@ namespace FinTrack.Api.Repository.Implementations
         }
 
 
-        public override async Task<ICollection<Income>> GetListAsync(object obj)
+        public override async Task<IReadOnlyList<Income>> GetListAsync(object obj)
         {
             if (!(obj is Budget budget)) return new List<Income>();
 

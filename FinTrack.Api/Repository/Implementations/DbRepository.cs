@@ -33,11 +33,11 @@ namespace FinTrack.Api.Repository.Implementations
             return await Items.AsNoTracking().Where(x => x.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task<ICollection<T>> GetListAsync()
+        public async Task<IReadOnlyList<T>> GetListAsync()
         {
             return await Items.AsNoTracking().ToListAsync();
         }
-        public abstract Task<ICollection<T>> GetListAsync(object obj);
+        public abstract Task<IReadOnlyList<T>> GetListAsync(object obj);
 
         public async Task<bool> SaveAsync()
         {
@@ -51,9 +51,13 @@ namespace FinTrack.Api.Repository.Implementations
             return await SaveAsync();
         }
 
-        public async Task<bool> IsItemExists(string name)
+        public async Task<bool> IsItemExistsAsync(string name)
         {
             return await Items.AnyAsync(x => x.Name == name);
+        }
+        public async Task<bool> IsItemExists(int id)
+        {
+            return await Items.AnyAsync(x => x.Id == id);
         }
     }
 }

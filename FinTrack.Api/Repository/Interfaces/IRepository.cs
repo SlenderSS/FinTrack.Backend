@@ -3,13 +3,14 @@
     public interface IRepository<T>
     {
         IQueryable<T> Items { get; }
-        Task<ICollection<T>> GetListAsync();
+        Task<IReadOnlyList<T>> GetListAsync();
         Task<T> GetItemAsync(int id);
         Task<bool> CreateAsync(T obj);
         Task<bool> UpdateAsync(T obj);
         Task<bool> DeleteAsync(T obj);
-        Task<bool> IsItemExists(string name);
+        Task<bool> IsItemExistsAsync(string name);
+        Task<bool> IsItemExists(int id);
         Task<bool> SaveAsync();
-        Task<ICollection<T>> GetListAsync(object obj);
+        Task<IReadOnlyList<T>> GetListAsync(object obj);
     }
 }

@@ -14,7 +14,7 @@ namespace FinTrack.Api.Repository.Implementations
         {
         }
 
-        public override async Task<ICollection<ExpenseCategory>> GetListAsync(object obj)
+        public override async Task<IReadOnlyList<ExpenseCategory>> GetListAsync(object obj)
         {
             if (!(obj is User user)) return new List<ExpenseCategory>();
 

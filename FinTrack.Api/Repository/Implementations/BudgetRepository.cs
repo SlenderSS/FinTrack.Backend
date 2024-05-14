@@ -1,4 +1,5 @@
-﻿using FinTrack.Api.Data;
+﻿using CSharpFunctionalExtensions;
+using FinTrack.Api.Data;
 using FinTrack.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -17,11 +18,9 @@ namespace FinTrack.Api.Repository.Implementations
         {
         }
 
-        public override async Task<ICollection<Budget>> GetListAsync(object obj)
+        public override Task<IReadOnlyList<Budget>> GetListAsync(object obj)
         {
-            if (!(obj is User user)) return new List<Budget>(); ;
-
-            return await Items.Where(x => x.UserId == user.Id).ToListAsync();
+            throw new NotImplementedException();
         }
     }
 
