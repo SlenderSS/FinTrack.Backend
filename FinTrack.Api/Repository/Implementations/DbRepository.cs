@@ -2,14 +2,16 @@
 using FinTrack.Api.Models.Base;
 using FinTrack.Api.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq.Expressions;
 
 namespace FinTrack.Api.Repository.Implementations
 {
-    public abstract class DbRepository<T> : IRepository<T> where T : NamedEntity
+    public class DbRepository<T> : IRepository<T> where T : NamedEntity
     {
         protected readonly FinTrackDbContext _context;
         private readonly DbSet<T> _set;
-
+        
         public virtual IQueryable<T> Items => _set;
         public DbRepository(FinTrackDbContext context)
         {
@@ -37,7 +39,12 @@ namespace FinTrack.Api.Repository.Implementations
         {
             return await Items.AsNoTracking().ToListAsync();
         }
-        public abstract Task<IReadOnlyList<T>> GetListAsync(object obj);
+
+
+        public virtual Task<IReadOnlyList<T>> GetListAsync(object obj)
+        {
+            return null;
+        }
 
         public async Task<bool> SaveAsync()
         {

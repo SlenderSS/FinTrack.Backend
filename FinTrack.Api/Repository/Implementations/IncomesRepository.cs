@@ -19,7 +19,7 @@ namespace FinTrack.Api.Repository.Implementations
         {
             if (!(obj is Budget budget)) return new List<Income>();
 
-            return await Items.Where(x => x.BudgetId == budget.Id).ToListAsync();
+            return await Items.AsNoTracking().Where(x => x.BudgetId == budget.Id).ToListAsync();
         }
     }
 }

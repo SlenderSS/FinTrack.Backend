@@ -18,7 +18,7 @@ namespace FinTrack.Api.Repository.Implementations
         {
             if (!(obj is User user)) return new List<ExpenseCategory>();
 
-            return await Items.Where(x => x.User.Id == user.Id).ToListAsync();
+            return await Items.AsNoTracking().Where(x => x.User.Id == user.Id).ToListAsync();
         }
     }
 }

@@ -14,11 +14,11 @@ namespace FinTrack.Api.Repository.Implementations
         {
         }
 
-        public override async Task<ICollection<IncomeCategory>> GetListAsync(object obj)
+        public override async Task<IReadOnlyList<IncomeCategory>> GetListAsync(object obj)
         {
             if (!(obj is User user)) return new List<IncomeCategory>();
 
-            return await Items.Where(x => x.User.Id == user.Id).ToListAsync();
+            return await Items.AsNoTracking().Where(x => x.User.Id == user.Id).ToListAsync();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace FinTrack.Api.Repository.Interfaces
+﻿using System.Linq.Expressions;
+
+namespace FinTrack.Api.Repository.Interfaces
 {
     public interface IRepository<T>
     {
