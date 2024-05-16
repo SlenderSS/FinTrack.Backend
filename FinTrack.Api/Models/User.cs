@@ -4,7 +4,7 @@ namespace FinTrack.Models;
 
 public class User : NamedEntity
 {
-    public required string Password { get; set; }
+    public string Password { get; set; }
     public ICollection<Budget>? Budgets { get; set; }
     public ICollection<ExpenseCategory>? UserExpenseCategories { get; set; }
     public ICollection<IncomeCategory>? UserIncomeCategories { get; set; }

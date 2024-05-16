@@ -7,8 +7,9 @@ namespace FinTrack.Api.Services.Interfaces
     public interface IBudgetService
     {
         Task<Result<IReadOnlyList<Budget>>> GetBudgetsAsync(int userId);
-
-        Task<Result> CreateBudgetAsync(Budget budget);
         Task<Result<Budget>> GetBudgetAsync(int budgetId);
+        Task<Result> CreateBudgetAsync(Budget budget);
+        Task<Result> UpdateBudgetAsync(int budgetId, Budget budget);
+        Task<Result> DeleteBudgetAsunc(Budget budget);
     }
 }

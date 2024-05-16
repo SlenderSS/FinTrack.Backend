@@ -1,5 +1,4 @@
 ﻿using CSharpFunctionalExtensions;
-using CSharpFunctionalExtensions.ValueTasks;
 using FinTrack.Api.Repository.Interfaces;
 using FinTrack.Api.Services.Interfaces;
 using FinTrack.Models;
@@ -31,7 +30,7 @@ namespace FinTrack.Api.Services.Implementations
 
         public async Task<Result<IReadOnlyList<Expense>>> GetExpensesAsync(int budgetId)
         {
-            if (!await _budgetRepository.IsItemExists(budgetId))
+            if (!await _budgetRepository.IsItemExistsAsync(budgetId))
                 return Result.Failure<IReadOnlyList<Expense>>("Incorrect budget Id");
 
             var expenses = await _expensesRepository.GetListAsync(budgetId);

@@ -1,4 +1,5 @@
 using FinTrack.Api.Data;
+using FinTrack.Api.Infrastructure;
 using FinTrack.Api.Repository;
 using FinTrack.Api.Services;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddRepositoriesInDb();
 builder.Services.AddServices();
+builder.Services.AddInfrastructure();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 

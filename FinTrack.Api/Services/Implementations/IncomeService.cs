@@ -30,7 +30,7 @@ namespace FinTrack.Api.Services.Implementations
 
         public async Task<Result<IReadOnlyList<Income>>> GetIncomesAsync(int budgetId)
         {
-            if (!await _budgetRepository.IsItemExists(budgetId))
+            if (!await _budgetRepository.IsItemExistsAsync(budgetId))
                 return Result.Failure<IReadOnlyList<Income>>("Incorrect budget Id");
 
             var incomes = await _incomesRepository.GetListAsync(budgetId);
@@ -39,6 +39,17 @@ namespace FinTrack.Api.Services.Implementations
                 return Result.Failure<IReadOnlyList<Income>>("There are no incomes in this budget");
 
             return Result.Success(incomes);
+        }
+
+        public async Task<Result<Income>> GetIncomeAsync(int incomeId)
+        {
+            if (!await _incomesRepository.IsItemExistsAsync(incomeId))
+                return Result.Failure<Income>("Incorrect income id");
+            var income = await _incomesRepository.GetItemAsync(incomeId);
+            if (income == null)
+                return Result.Failure<Income>("There is no income for this identifier");
+            return Result.Success(income);
+
         }
     }
 }

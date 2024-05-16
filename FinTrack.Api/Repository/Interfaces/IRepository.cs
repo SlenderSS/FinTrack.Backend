@@ -11,8 +11,9 @@ namespace FinTrack.Api.Repository.Interfaces
         Task<bool> UpdateAsync(T obj);
         Task<bool> DeleteAsync(T obj);
         Task<bool> IsItemExistsAsync(string name);
-        Task<bool> IsItemExists(int id);
+        Task<bool> IsItemExistsAsync(int id);
         Task<bool> SaveAsync();
         Task<IReadOnlyList<T>> GetListAsync(object obj);
+        Task<T> GetItemByNameAsync(string name);
     }
 }

@@ -62,9 +62,14 @@ namespace FinTrack.Api.Repository.Implementations
         {
             return await Items.AnyAsync(x => x.Name == name);
         }
-        public async Task<bool> IsItemExists(int id)
+        public async Task<bool> IsItemExistsAsync(int id)
         {
             return await Items.AnyAsync(x => x.Id == id);
+        }
+
+        public async Task<T> GetItemByNameAsync(string name)
+        {
+            return await Items.AsNoTracking().FirstOrDefaultAsync(x => x.Name == name);
         }
     }
 }

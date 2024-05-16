@@ -1,4 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
+using FinTrack.Api.Infrastructure.Interfaces;
 using FinTrack.Api.Repository.Interfaces;
 using FinTrack.Api.Services.Interfaces;
 using FinTrack.Models;
@@ -9,17 +10,30 @@ namespace FinTrack.Api.Services.Implementations
     public class UserService : IUserService
     {
         private readonly IRepository<User> _userRepository;
+        private readonly IPasswordHasher _hasher;
 
-        public UserService(IRepository<User> userRepository)
+        public UserService(IRepository<User> userRepository, IPasswordHasher hasher)
         {
             _userRepository = userRepository;
+            _hasher = hasher;
         }
-        public Task<Result<User>> AuthorizationAsync(string login, string password)
+        public async Task<Result<User>> LoginAsync(string name, string password)
         {
-            throw new NotImplementedException();
+            if (!await _userRepository.IsItemExistsAsync(name))
+                return Result.Failure<User>("User with this username does not exists");
+
+            var user = await _userRepository.GetItemByNameAsync(name);
+
+            var isCorrect = _hasher.Verify(password, user.Password);
+            if (!isCorrect)
+            {
+                return Result.Failure<User>("Incorrectly entered password");
+            }
+
+            return Result.Success(new User { Id = user.Id, Name = user.Name});  
         }
 
-        public Task<Result> ChangePasswordAsync(User user)
+        public Task<Result> UpdatePasswordAsync(User user)
         {
             throw new NotImplementedException();
         }
@@ -28,13 +42,13 @@ namespace FinTrack.Api.Services.Implementations
         {
             if (await _userRepository.IsItemExistsAsync(username))
                 return Result.Failure("The user with the same username already exists");
-
-            var userCreate = new User { Name = username, Password = password };
-            var isSuccess = await _userRepository.CreateAsync(userCreate);
-            if (isSuccess)
-                return Result.Success();
-            else
+            var hashedPassword = _hasher.Generate(password);
+            var userCreate = new User { Name = username, Password = hashedPassword };
+ 
+            if (!await _userRepository.CreateAsync(userCreate))
                 return Result.Failure("Something went wrong while saving");
+
+            return Result.Success();
         }
 
         public async Task<Result<User>> GetUserById(int userId)

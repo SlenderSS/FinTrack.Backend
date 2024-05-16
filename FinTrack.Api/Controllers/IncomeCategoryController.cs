@@ -21,7 +21,7 @@ namespace FinTrack.Api.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("userId")]
+        [HttpGet("{userId}")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<IncomeCategoryDto>))]
         public async Task<IActionResult> GeIncomeCategories(int userId)
         {
