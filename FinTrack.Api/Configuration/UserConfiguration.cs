@@ -22,10 +22,5 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder
             .HasMany(x => x.UserExpenseCategories)
             .WithOne(x => x.User);
-
-        builder
-            .HasMany(x => x.UserBudgetCategories)
-            .WithOne(x => x.User);
-
     }
 }

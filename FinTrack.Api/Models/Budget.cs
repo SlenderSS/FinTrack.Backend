@@ -9,8 +9,6 @@ public class Budget : NamedEntity
     public required int UserId { get; set; }
     public required User User { get; set; }
     public required DateTime CreationDate { get; set; }
-    public required int BudgetCategoryId { get; set; }
-    public required BudgetCategory BudgetCategory { get; set; }
     public required int CurrencyId { get; set; }
     public required Currency Currency { get; set; }
     public ICollection<Income>? Incomes { get; set; }

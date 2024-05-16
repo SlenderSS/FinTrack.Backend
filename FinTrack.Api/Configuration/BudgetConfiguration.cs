@@ -21,11 +21,6 @@ public class BudgetConfiguration : IEntityTypeConfiguration<Budget>
             .HasForeignKey(x => x.UserId);
 
         builder
-            .HasOne(x => x.BudgetCategory)
-            .WithMany(x => x.Budgets)
-            .HasForeignKey(x => x.BudgetCategoryId);
-
-        builder
             .HasOne(x => x.Currency)
             .WithMany(x => x.Budgets)
             .HasForeignKey(x => x.CurrencyId);

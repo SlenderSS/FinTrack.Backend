@@ -15,6 +15,14 @@ namespace FinTrack.Api.Helper
 
             CreateMap<IncomeCategory, IncomeCategoryDto>();
             CreateMap<IncomeCategoryDto, IncomeCategory>();
+
+            CreateMap<Expense, ExpenseDto>();
+            CreateMap<ExpenseDto, Expense>();
+
+            CreateMap<Income, IncomeDto>();
+            CreateMap<IncomeDto, Income>();
+
+
         }
     }
 }

@@ -10,7 +10,6 @@ namespace FinTrack.Api.Repository.Implementations
     {
         public override IQueryable<Budget> Items => 
             base.Items
-            .Include(x => x.BudgetCategory)
             .Include(x => x.Currency)
             .Include(x => x.User)
             ;

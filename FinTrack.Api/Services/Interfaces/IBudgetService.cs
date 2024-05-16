@@ -11,12 +11,4 @@ namespace FinTrack.Api.Services.Interfaces
         Task<Result> CreateBudgetAsync(Budget budget);
         Task<Result<Budget>> GetBudgetAsync(int budgetId);
     }
-
-    public interface IBudgetCategoryService
-    {
-        Task<Result<IReadOnlyList<BudgetCategory>>> GetBudgets(int budgetId);
-
-        Task<Result> CreateBudgetCategory(BudgetCategory budgetCategory);
-
-    }
 }

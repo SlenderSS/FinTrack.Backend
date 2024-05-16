@@ -8,7 +8,6 @@ namespace FinTrack.Api.Repository
     {
         public static IServiceCollection AddRepositoriesInDb(this IServiceCollection services) => services
             .AddTransient<IRepository<Currency>, DbRepository<Currency>>()
-            .AddTransient<IRepository<BudgetCategory>, BudgetsCategoryRepository>()
             .AddTransient<IRepository<Expense>, ExpensesRepository>()
             .AddTransient<IRepository<Budget>, BudgetRepository>()
             .AddTransient<IRepository<ExpenseCategory>, ExpenseCategoriesRepository>()

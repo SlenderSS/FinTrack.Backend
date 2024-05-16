@@ -7,7 +7,6 @@ namespace FinTrack.Api.Data
     public class FinTrackDbContext(DbContextOptions<FinTrackDbContext> options) : DbContext(options)
     {
         public DbSet<Budget> Budgets{ get; set; }
-        public DbSet<BudgetCategory> BudgetCategories { get; set; }
         public DbSet<Currency> Currencies { get; set; }
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<ExpenseCategory> ExpenseCategories { get; set; }
@@ -18,7 +17,6 @@ namespace FinTrack.Api.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new BudgetCategoryConfiguration());
             modelBuilder.ApplyConfiguration(new BudgetConfiguration());
             modelBuilder.ApplyConfiguration(new CurrencyConfiguration());
             modelBuilder.ApplyConfiguration(new ExpenseConfiguration());
