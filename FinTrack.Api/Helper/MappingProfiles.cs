@@ -4,6 +4,7 @@ using FinTrack.Api.Contracts.Expense;
 using FinTrack.Api.Contracts.ExpenseCategory;
 using FinTrack.Api.Contracts.Income;
 using FinTrack.Api.Contracts.IncomeCategory;
+using FinTrack.Api.Contracts.User;
 using FinTrack.Api.Contracts.Сurrency;
 using FinTrack.Models;
 namespace FinTrack.Api.Helper
@@ -16,19 +17,23 @@ namespace FinTrack.Api.Helper
             CreateMap<ReadCurrencyDto, Currency>();
 
             CreateMap<Budget, ReadBudgetDto>();
-            CreateMap<ReadBudgetDto, Budget>();
+            CreateMap<CreateBudgetDto, Budget>();
 
             CreateMap<ExpenseCategory, ReadExpenseCategoryDto>();
-            CreateMap<ReadExpenseCategoryDto, ExpenseCategory>();
+            CreateMap<CreateExpenseCategoryDto, ExpenseCategory>();
 
             CreateMap<IncomeCategory, ReadIncomeCategoryDto>();
-            CreateMap<ReadIncomeCategoryDto, IncomeCategory>();
+            CreateMap<CreateIncomeCategoryDto, IncomeCategory>();
 
             CreateMap<Expense, ReadExpenseDto>();
-            CreateMap<ReadExpenseDto, Expense>();
+            CreateMap<CreateExpenseDto, Expense>();
 
             CreateMap<Income, ReadIncomeDto>();
-            CreateMap<ReadIncomeDto, Income>();
+            CreateMap<CreateIncomeDto, Income>();
+
+            CreateMap<User, ReadUserDto>();
+            CreateMap<CreateUserDto, User>();
+
 
 
         }

@@ -7,5 +7,6 @@ namespace FinTrack.Api.Services.Interfaces
     {
         Task<Result<IReadOnlyList<Expense>>> GetExpensesAsync(int budgetId);
         Task<Result> CreateExpenseAsync(Expense expense);
+        Task<Result<Expense>> GetExpenseAsync(int expenseId);
     }
 }

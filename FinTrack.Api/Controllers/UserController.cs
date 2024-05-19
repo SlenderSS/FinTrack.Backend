@@ -23,14 +23,14 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    [ProducesResponseType(200, Type = typeof(int))]
+    [ProducesResponseType(200, Type = typeof(ReadUserDto))]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> LoginUser([FromQuery] CreateUserDto user)
+    public async Task<IActionResult> LoginUser([FromQuery] CreateUserDto userCreate)
     {
-        if (user == null)
+        if (userCreate == null)
             return BadRequest(ModelState);
 
-        var userMap = _mapper.Map<CreateUserDto>(user);
+        var userMap = _mapper.Map<CreateUserDto>(userCreate);
 
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -43,8 +43,9 @@ public class UserController : ControllerBase
             return BadRequest(ModelState);
         }
 
+        var user = _mapper.Map<ReadUserDto>(login.Value);
 
-        return Ok(login.Value.Id);
+        return Ok(user);
 
     }
 

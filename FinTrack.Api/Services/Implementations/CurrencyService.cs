@@ -37,5 +37,9 @@ namespace FinTrack.Api.Services.Implementations
 
             return Result.Success(currencies);
         }
+        public async Task<Result> IsCurrencyExists(int currencyId) =>
+            await _currencyRepository.IsItemExistsAsync(currencyId)
+                ? Result.Success()
+                : Result.Failure("Non-exists identifier");
     }
 }

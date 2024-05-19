@@ -14,7 +14,7 @@ namespace FinTrack.Api.Controllers
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public ExpenseCategoryController(IExpenseCategoryService expenseCategoryService,IUserService userService, IMapper mapper)
+        public ExpenseCategoryController(IExpenseCategoryService expenseCategoryService, IUserService userService, IMapper mapper)
         {
             _expenseCategoryService = expenseCategoryService;
             _userService = userService;
@@ -44,16 +44,20 @@ namespace FinTrack.Api.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(422)]
-        public async Task<IActionResult> CreateExpenseCategory([FromQuery] int userId,[FromBody] ReadExpenseCategoryDto expenseCategoryCreate)
+        public async Task<IActionResult> CreateExpenseCategory([FromQuery] int userId, [FromBody] ReadExpenseCategoryDto expenseCategoryCreate)
         {
             if (expenseCategoryCreate == null)
                 return BadRequest(ModelState);
 
             var category = _mapper.Map<ExpenseCategory>(expenseCategoryCreate);
-            
-            var user = await _userService.GetUserById(userId);
 
-            category.User = user.Value;
+            if ((await _userService.GetUserById(userId)).IsFailure)
+            {
+                ModelState.AddModelError("", "Non-existed user identifier");
+                return BadRequest(ModelState);
+            }
+
+            category.UserId = userId;
 
             var result = await _expenseCategoryService.CreateExpenseCategoryAsync(category);
             if (result.IsFailure)

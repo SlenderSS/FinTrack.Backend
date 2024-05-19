@@ -8,5 +8,6 @@ namespace FinTrack.Api.Services.Interfaces
         Task<Result<IReadOnlyList<Currency>>> GetCurrenciess();
 
         Task<Result> CreateCurrency(Currency currency);
+        Task<Result> IsCurrencyExists(int currencyId);
     }
 }

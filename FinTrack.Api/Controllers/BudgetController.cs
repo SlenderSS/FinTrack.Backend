@@ -15,12 +15,18 @@ namespace FinTrack.Api.Controllers
     {
         private readonly IBudgetService _budgetService;
         private readonly IUserService _userService;
+        private readonly ICurrencyService _currencyService;
         private readonly IMapper _mapper;
 
-        public BudgetController(IBudgetService budgetService, IUserService userService, IMapper mapper)
+        public BudgetController(
+            IBudgetService budgetService,
+            IUserService userService, 
+            ICurrencyService currencyService,
+            IMapper mapper)
         {
             _budgetService = budgetService;
             _userService = userService;
+            _currencyService = currencyService;
             _mapper = mapper;
         }
 
@@ -41,17 +47,30 @@ namespace FinTrack.Api.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(422)]
-        public async Task<IActionResult> CreateBudget([FromQuery] int userId, [FromQuery] int currencyId, [FromBody] ReadBudgetDto budgetCreate)
+        public async Task<IActionResult> CreateBudget([FromQuery] int userId, [FromQuery] int currencyId, [FromBody] CreateBudgetDto budgetCreate)
         {
             if (budgetCreate == null)
                 return BadRequest(ModelState);
 
             var budget = _mapper.Map<Budget>(budgetCreate);
 
-            var user = await _userService.GetUserById(userId);
-            budget.User = user.Value;
+            if((await _userService.GetUserById(userId)).IsFailure)
+            {
+                ModelState.AddModelError("", "Non-existent user identifier");
+                return BadRequest(ModelState);
+            }
+
+            if ((await _currencyService.IsCurrencyExists(currencyId)).IsFailure)
+            {
+                ModelState.AddModelError("", "Non-existent currency identifier");
+                return BadRequest(ModelState);
+            }
+
+            budget.UserId = userId;
+            budget.CurrencyId = currencyId;
 
             var result = await _budgetService.CreateBudgetAsync(budget);
+
             if (result.IsFailure)
             {
                 ModelState.AddModelError("", result.Error);

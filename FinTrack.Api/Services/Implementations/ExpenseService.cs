@@ -1,4 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
+using FinTrack.Api.Repository.Implementations;
 using FinTrack.Api.Repository.Interfaces;
 using FinTrack.Api.Services.Interfaces;
 using FinTrack.Models;
@@ -7,12 +8,12 @@ namespace FinTrack.Api.Services.Implementations
 {
     public class ExpenseService : IExpenseService
     {
-        private readonly IRepository<Expense> _expensesRepository;
+        private readonly IRepository<Expense> _expenseRepository;
         private readonly IRepository<Budget> _budgetRepository;
 
         public ExpenseService(IRepository<Expense> expensesRepository, IRepository<Budget> budgetRepository)
         {
-            this._expensesRepository = expensesRepository;
+            this._expenseRepository = expensesRepository;
             this._budgetRepository = budgetRepository;
         }
         public async Task<Result> CreateExpenseAsync(Expense expenseCreate)
@@ -22,7 +23,7 @@ namespace FinTrack.Api.Services.Implementations
                 return Result.Failure("Null reference object"); 
             }
 
-            if(!await _expensesRepository.CreateAsync(expenseCreate))
+            if(!await _expenseRepository.CreateAsync(expenseCreate))
                 return Result.Failure("Something went wrong while saving");
 
             return Result.Success();
@@ -33,12 +34,23 @@ namespace FinTrack.Api.Services.Implementations
             if (!await _budgetRepository.IsItemExistsAsync(budgetId))
                 return Result.Failure<IReadOnlyList<Expense>>("Incorrect budget Id");
 
-            var expenses = await _expensesRepository.GetListAsync(budgetId);
+            var expenses = await _expenseRepository.GetListAsync(budgetId);
 
             if (expenses == null)
                 return Result.Failure<IReadOnlyList<Expense>>("There are no expenses in this budget");
 
             return Result.Success(expenses);
+        }
+
+        public async Task<Result<Expense>> GetExpenseAsync(int expenseId)
+        {
+            if (!await _expenseRepository.IsItemExistsAsync(expenseId))
+                return Result.Failure<Expense>("Incorrect expense id");
+            var expense = await _expenseRepository.GetItemAsync(expenseId);
+            if (expense == null)
+                return Result.Failure<Expense>("There is no expense for this identifier");
+            return Result.Success(expense);
+
         }
     }
 }
