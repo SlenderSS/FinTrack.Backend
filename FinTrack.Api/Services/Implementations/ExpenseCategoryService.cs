@@ -32,7 +32,7 @@ namespace FinTrack.Api.Services.Implementations
                 return Result.Failure("A category with the same name is already exists");
             }
 
-            if (!(await _expenseCategoryRepository.CreateAsync(expenseCategory)))
+            if (!(await _expenseCategoryRepository.CreateAsync(expenseCategoryCreate)))
             {
                 return Result.Failure("Something went wrong while saving");
             }

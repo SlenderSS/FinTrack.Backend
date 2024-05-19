@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FinTrack.Api.Contracts;
+using FinTrack.Api.Contracts.Сurrency;
 using FinTrack.Api.Services.Interfaces;
 using FinTrack.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +21,7 @@ namespace FinTrack.Api.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<CurrencyDto>))]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<ReadCurrencyDto>))]
         public async Task<IActionResult> GetCurrencies()
         {
             var currencies = await _currencyService.GetCurrenciess();
@@ -30,7 +30,7 @@ namespace FinTrack.Api.Controllers
                 return NotFound();
             }
 
-            var currenciesMap = _mapper.Map<IEnumerable<CurrencyDto>>(currencies.Value.ToList());
+            var currenciesMap = _mapper.Map<IEnumerable<ReadCurrencyDto>>(currencies.Value.ToList());
 
             if (!ModelState.IsValid)
             {
@@ -43,7 +43,7 @@ namespace FinTrack.Api.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(422)]
-        public async Task<IActionResult> CreateCurrency(CurrencyDto currencyDto)
+        public async Task<IActionResult> CreateCurrency(ReadCurrencyDto currencyDto)
         {
             if (currencyDto == null)
                 return BadRequest(ModelState);

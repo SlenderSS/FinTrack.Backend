@@ -1,5 +1,10 @@
 ﻿using AutoMapper;
-using FinTrack.Api.Contracts;
+using FinTrack.Api.Contracts.Budget;
+using FinTrack.Api.Contracts.Expense;
+using FinTrack.Api.Contracts.ExpenseCategory;
+using FinTrack.Api.Contracts.Income;
+using FinTrack.Api.Contracts.IncomeCategory;
+using FinTrack.Api.Contracts.Сurrency;
 using FinTrack.Models;
 namespace FinTrack.Api.Helper
 {
@@ -7,20 +12,23 @@ namespace FinTrack.Api.Helper
     {
         public MappingProfiles()
         {
-            CreateMap<Currency, CurrencyDto>();
-            CreateMap<CurrencyDto, Currency>();
+            CreateMap<Currency, ReadCurrencyDto>();
+            CreateMap<ReadCurrencyDto, Currency>();
 
-            CreateMap<ExpenseCategory, ExpenseCategoryDto>();
-            CreateMap<ExpenseCategoryDto, ExpenseCategory>();
+            CreateMap<Budget, ReadBudgetDto>();
+            CreateMap<ReadBudgetDto, Budget>();
 
-            CreateMap<IncomeCategory, IncomeCategoryDto>();
-            CreateMap<IncomeCategoryDto, IncomeCategory>();
+            CreateMap<ExpenseCategory, ReadExpenseCategoryDto>();
+            CreateMap<ReadExpenseCategoryDto, ExpenseCategory>();
 
-            CreateMap<Expense, ExpenseDto>();
-            CreateMap<ExpenseDto, Expense>();
+            CreateMap<IncomeCategory, ReadIncomeCategoryDto>();
+            CreateMap<ReadIncomeCategoryDto, IncomeCategory>();
 
-            CreateMap<Income, IncomeDto>();
-            CreateMap<IncomeDto, Income>();
+            CreateMap<Expense, ReadExpenseDto>();
+            CreateMap<ReadExpenseDto, Expense>();
+
+            CreateMap<Income, ReadIncomeDto>();
+            CreateMap<ReadIncomeDto, Income>();
 
 
         }

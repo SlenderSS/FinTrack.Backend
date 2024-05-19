@@ -1,6 +1,4 @@
-﻿
-
-using FinTrack.Models;
+﻿using FinTrack.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

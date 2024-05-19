@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FinTrack.Api.Contracts;
+using FinTrack.Api.Contracts.Income;
 using FinTrack.Api.Services.Interfaces;
 using FinTrack.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -22,12 +22,12 @@ namespace FinTrack.Api.Controllers
         }
 
         [HttpGet("{budgetId}")]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<IncomeDto>))]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<ReadIncomeDto>))]
         public async Task<IActionResult> GetIncomes(int budgetId)
         {
             var incomes = await _incomeService.GetIncomesAsync(budgetId);
 
-            var incomesMap = _mapper.Map<IEnumerable<IncomeDto>>(incomes.Value.ToList());
+            var incomesMap = _mapper.Map<IEnumerable<ReadIncomeDto>>(incomes.Value.ToList());
 
             if (!ModelState.IsValid)
             {
@@ -42,7 +42,7 @@ namespace FinTrack.Api.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(422)]
-        public async Task<IActionResult> CreateIncome([FromQuery] int budgetId, [FromBody] IncomeDto incomeCreate)
+        public async Task<IActionResult> CreateIncome([FromQuery] int budgetId, [FromBody] ReadIncomeDto incomeCreate)
         {
             if (incomeCreate == null)
                 return BadRequest(ModelState);
@@ -65,11 +65,11 @@ namespace FinTrack.Api.Controllers
 
 
         [HttpGet("{incomeId}")]
-        [ProducesResponseType(200, Type = typeof(IncomeDto))]
+        [ProducesResponseType(200, Type = typeof(ReadIncomeDto))]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetIncome(int incomeId)
         {
-            var incomeMap = _mapper.Map<IncomeDto>(await _incomeService.GetIncomeAsync(incomeId));
+            var incomeMap = _mapper.Map<ReadIncomeDto>(await _incomeService.GetIncomeAsync(incomeId));
             if(!ModelState.IsValid) 
             { 
                 return BadRequest(ModelState);

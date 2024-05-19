@@ -1,6 +1,4 @@
-﻿
-
-using FinTrack.Models;
+﻿using FinTrack.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -24,6 +22,8 @@ public class IncomeConfiguration : IEntityTypeConfiguration<Income>
         builder
             .HasOne(x => x.IncomeCategory)
             .WithMany(x => x.Incomes)
-            .HasForeignKey(x => x.IncomeCategoryId);
+            .HasForeignKey(x => x.IncomeCategoryId)
+
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

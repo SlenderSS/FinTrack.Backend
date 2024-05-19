@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FinTrack.Api.Contracts;
+using FinTrack.Api.Contracts.ExpenseCategory;
 using FinTrack.Api.Services.Interfaces;
 using FinTrack.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +22,7 @@ namespace FinTrack.Api.Controllers
         }
 
         [HttpGet("{userId}")]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<ExpenseCategoryDto>))]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<ReadExpenseCategoryDto>))]
         public async Task<IActionResult> GeExpenseCategories(int userId)
         {
             var categories = await _expenseCategoryService.GetExpenseCategoriesAsync(userId);
@@ -31,7 +31,7 @@ namespace FinTrack.Api.Controllers
                 return NotFound();
             }
 
-            var categoriesMap = _mapper.Map<IEnumerable<ExpenseCategoryDto>>(categories.Value.ToList());
+            var categoriesMap = _mapper.Map<IEnumerable<ReadExpenseCategoryDto>>(categories.Value.ToList());
 
             if (!ModelState.IsValid)
             {
@@ -44,7 +44,7 @@ namespace FinTrack.Api.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(422)]
-        public async Task<IActionResult> CreateExpenseCategory([FromQuery] int userId,[FromBody] ExpenseCategoryDto expenseCategoryCreate)
+        public async Task<IActionResult> CreateExpenseCategory([FromQuery] int userId,[FromBody] ReadExpenseCategoryDto expenseCategoryCreate)
         {
             if (expenseCategoryCreate == null)
                 return BadRequest(ModelState);

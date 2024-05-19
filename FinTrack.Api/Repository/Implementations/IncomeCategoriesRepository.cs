@@ -17,8 +17,8 @@ namespace FinTrack.Api.Repository.Implementations
         public override async Task<IReadOnlyList<IncomeCategory>> GetListAsync(object obj)
         {
             if (!(obj is User user)) return new List<IncomeCategory>();
-
-            return await Items.AsNoTracking().Where(x => x.User.Id == user.Id).ToListAsync();
+            return null;
+            //return await Items.AsNoTracking().Where(x => x.User.Id == user.Id).ToListAsync();
         }
     }
 }

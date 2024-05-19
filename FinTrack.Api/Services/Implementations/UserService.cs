@@ -59,7 +59,14 @@ namespace FinTrack.Api.Services.Implementations
 
             return user;
         }
+        public async Task<Result<User>> GetUserByName(string userName)
+        {
+            var user = await _userRepository.GetItemByNameAsync(userName);
+            if (user == null)
+                return Result.Failure<User>("User is not exists");
 
+            return user;
+        }
         public async Task<Result> DeleteUserAccount(User user)
         {
             var isSuccess = await _userRepository.DeleteAsync(user);

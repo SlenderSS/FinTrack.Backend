@@ -10,7 +10,6 @@ namespace FinTrack.Api.Services.Interfaces
         Task<Result> UpdatePasswordAsync(User user);
         Task<Result> DeleteUserAccount(User user);
         Task<Result<User>> GetUserById(int userId);
-
-
+        Task<Result<User>> GetUserByName(string userName);
     }
 }

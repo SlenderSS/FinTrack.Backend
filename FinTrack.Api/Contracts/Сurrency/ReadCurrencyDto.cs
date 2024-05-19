@@ -1,6 +1,6 @@
-﻿namespace FinTrack.Api.Contracts
+﻿namespace FinTrack.Api.Contracts.Сurrency
 {
-    public class CurrencyDto
+    public class ReadCurrencyDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

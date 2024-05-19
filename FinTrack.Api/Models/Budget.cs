@@ -11,8 +11,8 @@ public class Budget : NamedEntity
     public required DateTime CreationDate { get; set; }
     public required int CurrencyId { get; set; }
     public required Currency Currency { get; set; }
-    public ICollection<Income>? Incomes { get; set; }
-    public ICollection<Expense>? Expences { get; set; }
+    public ICollection<Income> Incomes { get; set; }
+    public ICollection<Expense> Expences { get; set; }
 
 
 }

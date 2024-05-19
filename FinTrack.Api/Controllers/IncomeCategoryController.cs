@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FinTrack.Api.Contracts;
+using FinTrack.Api.Contracts.IncomeCategory;
 using FinTrack.Api.Services.Interfaces;
 using FinTrack.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +22,7 @@ namespace FinTrack.Api.Controllers
         }
 
         [HttpGet("{userId}")]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<IncomeCategoryDto>))]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<ReadIncomeCategoryDto>))]
         public async Task<IActionResult> GeIncomeCategories(int userId)
         {
             var categories = await _incomeCategoryService.GetIncomeCategoriesAsync(userId);
@@ -31,7 +31,7 @@ namespace FinTrack.Api.Controllers
                 return NotFound();
             }
 
-            var categoriesMap = _mapper.Map<IEnumerable<IncomeCategoryDto>>(categories.Value.ToList());
+            var categoriesMap = _mapper.Map<IEnumerable<ReadIncomeCategoryDto>>(categories.Value.ToList());
 
             if (!ModelState.IsValid)
             {
@@ -44,7 +44,7 @@ namespace FinTrack.Api.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(422)]
-        public async Task<IActionResult> CreateIncomeCategory([FromQuery] int userId, [FromBody] IncomeCategoryDto incomeCategoryCreate)
+        public async Task<IActionResult> CreateIncomeCategory([FromQuery] int userId, [FromBody] ReadIncomeCategoryDto incomeCategoryCreate)
         {
             if (incomeCategoryCreate == null)
                 return BadRequest(ModelState);
@@ -53,7 +53,7 @@ namespace FinTrack.Api.Controllers
 
             var user = await _userService.GetUserById(userId);
 
-            category.User = user.Value;
+            category.UserId = userId;
 
             var result = await _incomeCategoryService.CreateIncomeCategoryAsync(category);
             if (result.IsFailure)

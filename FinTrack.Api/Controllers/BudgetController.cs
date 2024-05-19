@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FinTrack.Api.Contracts;
+using FinTrack.Api.Contracts.Budget;
 using FinTrack.Api.Services.Implementations;
 using FinTrack.Api.Services.Interfaces;
 using FinTrack.Models;
@@ -25,11 +25,11 @@ namespace FinTrack.Api.Controllers
         }
 
         [HttpGet("{userId}")]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<BudgetDto>))]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<ReadBudgetDto>))]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetBudgets(int userId)
         {
-            var budgets = _mapper.Map<IEnumerable<BudgetDto>>(await _budgetService.GetBudgetsAsync(userId));
+            var budgets = _mapper.Map<IEnumerable<ReadBudgetDto>>(await _budgetService.GetBudgetsAsync(userId));
             
             if(!ModelState.IsValid)
             {
@@ -41,7 +41,7 @@ namespace FinTrack.Api.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(422)]
-        public async Task<IActionResult> CreateBudget([FromQuery] int userId, [FromBody] BudgetDto budgetCreate)
+        public async Task<IActionResult> CreateBudget([FromQuery] int userId, [FromQuery] int currencyId, [FromBody] ReadBudgetDto budgetCreate)
         {
             if (budgetCreate == null)
                 return BadRequest(ModelState);

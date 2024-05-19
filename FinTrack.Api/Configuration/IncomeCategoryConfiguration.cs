@@ -1,6 +1,4 @@
-﻿
-
-using FinTrack.Models;
+﻿using FinTrack.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -13,8 +11,14 @@ public class IncomeCategoryConfiguration : IEntityTypeConfiguration<IncomeCatego
         builder
             .HasKey(x => x.Id);
 
+        //builder.HasOne(x => x.User)
+        //    .WithMany(x => x.UserIncomeCategories);
+
         builder
             .HasMany(x => x.Incomes)
-            .WithOne(x => x.IncomeCategory);
+            .WithOne(x => x.IncomeCategory)
+            .OnDelete(DeleteBehavior.NoAction);
+        //.OnDelete(DeleteBehavior.NoAction);
+
     }
 }

@@ -1,8 +1,7 @@
-﻿namespace FinTrack.Api.Contracts
+﻿namespace FinTrack.Api.Contracts.Income
 {
-    public class IncomeDto
+    public class CreateIncomeDto
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal ExpenseVolume { get; set; }

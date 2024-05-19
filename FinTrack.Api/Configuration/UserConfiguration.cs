@@ -1,6 +1,4 @@
-﻿
-
-using FinTrack.Models;
+﻿using FinTrack.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -17,7 +15,8 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder
             .HasMany(x => x.UserIncomeCategories)
-            .WithOne(x => x.User);
+            .WithOne(x => x.User)
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder
             .HasMany(x => x.UserExpenseCategories)

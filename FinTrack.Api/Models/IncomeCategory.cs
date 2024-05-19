@@ -1,4 +1,5 @@
 ﻿using FinTrack.Api.Models.Base;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FinTrack.Models;
 

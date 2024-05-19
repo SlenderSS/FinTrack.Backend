@@ -22,8 +22,7 @@ namespace FinTrack.Api.Services.Implementations
 
             var incomeCategory = _incomeCategoryRepository
                .Items
-               .FirstOrDefault(
-               x => x.UserId == incomeCategoryCreate.UserId &&
+               .FirstOrDefault(x =>
                x.Name.Trim().ToUpper() == incomeCategoryCreate.Name.Trim().ToUpper());
 
             if (incomeCategory != null)
@@ -31,7 +30,7 @@ namespace FinTrack.Api.Services.Implementations
                 return Result.Failure("A category with the same name is already exists");
             }
 
-            if (!(await _incomeCategoryRepository.CreateAsync(incomeCategory)))
+            if (!(await _incomeCategoryRepository.CreateAsync(incomeCategoryCreate)))
             {
                 return Result.Failure("Something went wrong while saving");
             }
@@ -44,13 +43,13 @@ namespace FinTrack.Api.Services.Implementations
 
             var incomeCategoriesByUser = await _incomeCategoryRepository.GetListAsync(userId);
 
-            var combinedCategories =  (await _incomeCategoryRepository.GetListAsync())
-                  .Where(x => x.UserId == null)
-                  .Concat(incomeCategoriesByUser)
-                  .ToList()
-                  .AsReadOnly();
+            //var combinedCategories =  (await _incomeCategoryRepository.GetListAsync())
+            //      .Where(x => x.User == null)
+            //      .Concat(incomeCategoriesByUser)
+            //      .ToList()
+            //      .AsReadOnly();
 
-            return Result.Success<IReadOnlyList<IncomeCategory>>(combinedCategories);
+            return Result.Success<IReadOnlyList<IncomeCategory>>(incomeCategoriesByUser);
         }
 
 
