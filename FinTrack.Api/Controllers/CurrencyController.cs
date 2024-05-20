@@ -43,7 +43,7 @@ namespace FinTrack.Api.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(422)]
-        public async Task<IActionResult> CreateCurrency(ReadCurrencyDto currencyDto)
+        public async Task<IActionResult> CreateCurrency(CreateCurrencyDto currencyDto)
         {
             if (currencyDto == null)
                 return BadRequest(ModelState);

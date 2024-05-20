@@ -26,6 +26,11 @@ namespace FinTrack.Api.Services.Implementations
             if(!await _expenseRepository.CreateAsync(expenseCreate))
                 return Result.Failure("Something went wrong while saving");
 
+            var budgetUpdate = await _budgetRepository.GetItemAsync(expenseCreate.BudgetId);
+            budgetUpdate.TotalAmountOfMoney -= expenseCreate.ExpenseVolume;
+
+            await _budgetRepository.UpdateAsync(budgetUpdate);
+
             return Result.Success();
         }
 

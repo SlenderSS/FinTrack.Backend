@@ -41,11 +41,11 @@ namespace FinTrack.Api.Services.Implementations
         public async Task<Result<IReadOnlyList<Budget>>> GetBudgetsAsync(int userId)
         {
             var budgets = await _budgetRepository.Items.AsNoTracking()
-                                                    .Where(x => x.UserId == userId)
+                                                    .Where(x => x.User.Id == userId)
                                                     .ToListAsync();
-            if (budgets != null)
+            if (budgets == null)
             { 
-                return Result.Failure<IReadOnlyList<Budget>>("There are no budgets in your account yet"); 
+                return Result.Success<IReadOnlyList<Budget>>(new List<Budget>()); 
             }
 
             return Result.Success<IReadOnlyList<Budget>>(budgets);

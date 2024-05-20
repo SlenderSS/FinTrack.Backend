@@ -11,7 +11,10 @@ public class BudgetConfiguration : IEntityTypeConfiguration<Budget>
         builder
             .HasKey(x => x.Id);
 
-        builder.Property(x => x.AmountOfMoney)
+        builder.Property(x => x.PlannedAmountOfMoney)
+            .HasColumnType("decimal(18,4)");
+
+        builder.Property(x => x.TotalAmountOfMoney)
             .HasColumnType("decimal(18,4)");
         builder
             .HasOne(x => x.User)

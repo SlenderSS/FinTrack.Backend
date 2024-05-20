@@ -35,7 +35,8 @@ namespace FinTrack.Api.Controllers
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetBudgets(int userId)
         {
-            var budgets = _mapper.Map<IEnumerable<ReadBudgetDto>>(await _budgetService.GetBudgetsAsync(userId));
+            var budgets = _mapper.Map<IEnumerable<ReadBudgetDto>>(
+                            (await _budgetService.GetBudgetsAsync(userId)).Value);
             
             if(!ModelState.IsValid)
             {

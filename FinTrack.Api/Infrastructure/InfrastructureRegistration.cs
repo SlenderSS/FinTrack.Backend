@@ -7,6 +7,7 @@ namespace FinTrack.Api.Infrastructure
     public static class InfrastructureRegistration
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services) => services
-            .AddTransient<IPasswordHasher, PasswordHasher>();
+            .AddTransient<IPasswordHasher, PasswordHasher>()
+            .AddTransient<IJwtProvider, JwtProvider>();
     }
 }

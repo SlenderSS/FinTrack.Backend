@@ -23,7 +23,7 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    [ProducesResponseType(200, Type = typeof(ReadUserDto))]
+    [ProducesResponseType(200, Type = typeof(string))]
     [ProducesResponseType(400)]
     public async Task<IActionResult> LoginUser([FromQuery] CreateUserDto userCreate)
     {
@@ -43,9 +43,7 @@ public class UserController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var user = _mapper.Map<ReadUserDto>(login.Value);
-
-        return Ok(user);
+        return Ok(login.Value);
 
     }
 

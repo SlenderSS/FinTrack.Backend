@@ -14,7 +14,7 @@ namespace FinTrack.Api.Helper
         public MappingProfiles()
         {
             CreateMap<Currency, ReadCurrencyDto>();
-            CreateMap<ReadCurrencyDto, Currency>();
+            CreateMap<CreateCurrencyDto, Currency>();
 
             CreateMap<Budget, ReadBudgetDto>();
             CreateMap<CreateBudgetDto, Budget>();
