@@ -22,9 +22,11 @@ namespace FinTrack.Api.Services.Implementations
             { 
                 return Result.Failure("Null reference object"); 
             }
-
+            //expenseCreate.ExpenceCategoryId; 
             if(!await _expenseRepository.CreateAsync(expenseCreate))
                 return Result.Failure("Something went wrong while saving");
+
+
 
             var budgetUpdate = await _budgetRepository.GetItemAsync(expenseCreate.BudgetId);
             budgetUpdate.TotalAmountOfMoney -= expenseCreate.ExpenseVolume;

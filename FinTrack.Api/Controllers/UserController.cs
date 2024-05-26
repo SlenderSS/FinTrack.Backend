@@ -43,7 +43,11 @@ public class UserController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        return Ok(login.Value);
+        var user = _mapper.Map<ReadUserDto>(login.Value);
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        return Ok(user);
 
     }
 

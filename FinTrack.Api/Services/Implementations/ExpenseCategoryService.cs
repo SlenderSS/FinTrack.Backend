@@ -54,6 +54,11 @@ namespace FinTrack.Api.Services.Implementations
             return Result.Success<IReadOnlyList<ExpenseCategory>>(combinedCategories);
         }
 
+        public async Task<Result<ExpenseCategory>> GetExpenseCategory(int categoryId)
+        {
+            return await _expenseCategoryRepository.GetItemAsync(categoryId);
+        }
+
 
     }
 }

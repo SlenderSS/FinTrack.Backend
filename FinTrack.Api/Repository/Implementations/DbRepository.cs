@@ -32,7 +32,7 @@ namespace FinTrack.Api.Repository.Implementations
 
         public async Task<T> GetItemAsync(int id)
         {
-            return await Items.AsNoTracking().Where(x => x.Id == id).FirstOrDefaultAsync();
+            return await Items.AsNoTracking().Where(x => x.Id == id).FirstOrDefaultAsync().ConfigureAwait(false);
         }
 
         public async Task<IReadOnlyList<T>> GetListAsync()

@@ -11,12 +11,18 @@ namespace FinTrack.Api.Controllers
     public class ExpenseController : ControllerBase
     {
         private readonly IExpenseService _expenseService;
+        private readonly IExpenseCategoryService _categoryService;
         private readonly IBudgetService _budgetService;
         private readonly IMapper _mapper;
 
-        public ExpenseController(IExpenseService expenseService, IBudgetService budgetService, IMapper mapper)
+        public ExpenseController(
+            IExpenseService expenseService, 
+            IExpenseCategoryService categoryService, 
+            IBudgetService budgetService, 
+            IMapper mapper)
         {
             _expenseService = expenseService;
+            _categoryService = categoryService;
             _budgetService = budgetService;
             _mapper = mapper;
         }
@@ -42,18 +48,24 @@ namespace FinTrack.Api.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(422)]
-        public async Task<IActionResult> CreateExpense([FromQuery] int budgetId, [FromBody] ReadExpenseDto expenseCreate)
+        public async Task<IActionResult> CreateExpense([FromQuery] int budgetId, [FromBody] CreateExpenseDto expenseCreate)
         {
             if (expenseCreate == null)
                 return BadRequest(ModelState);
 
-            var category = _mapper.Map<Expense>(expenseCreate);
+            var expense = _mapper.Map<Expense>(expenseCreate);
 
-            var budget = await _budgetService.GetBudgetAsync(budgetId);
+            if((await _budgetService.GetBudgetAsync(budgetId)).IsFailure)
+            {
+                return BadRequest(ModelState);
+            }
 
-            category.Budget = budget.Value;
+            expense.BudgetId = budgetId;
 
-            var result = await _expenseService.CreateExpenseAsync(category);
+            //var category = await _categoryService.GetExpenseCategory((int)expense.ExpenseCategoryId);
+
+           // expense.ExpenseCategory = category.Value;
+            var result = await _expenseService.CreateExpenseAsync(expense);
             if (result.IsFailure)
             {
                 ModelState.AddModelError("", result.Error);

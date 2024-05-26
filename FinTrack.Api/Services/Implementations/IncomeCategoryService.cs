@@ -43,11 +43,11 @@ namespace FinTrack.Api.Services.Implementations
 
             var incomeCategoriesByUser = await _incomeCategoryRepository.GetListAsync(userId);
 
-            //var combinedCategories =  (await _incomeCategoryRepository.GetListAsync())
-            //      .Where(x => x.User == null)
-            //      .Concat(incomeCategoriesByUser)
-            //      .ToList()
-            //      .AsReadOnly();
+            var combinedCategories = (await _incomeCategoryRepository.GetListAsync())
+                  .Where(x => x.User == null)
+                  .Concat(incomeCategoriesByUser)
+                  .ToList()
+                  .AsReadOnly();
 
             return Result.Success<IReadOnlyList<IncomeCategory>>(incomeCategoriesByUser);
         }

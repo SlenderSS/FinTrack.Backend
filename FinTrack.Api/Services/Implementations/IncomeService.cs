@@ -12,8 +12,8 @@ namespace FinTrack.Api.Services.Implementations
 
         public IncomeService(IRepository<Income> incomesRepository, IRepository<Budget> budgetRepository)
         {
-            this._incomesRepository = incomesRepository;
-            this._budgetRepository = budgetRepository;
+           _incomesRepository = incomesRepository;
+           _budgetRepository = budgetRepository;
         }
         public async Task<Result> CreateIncomeAsync(Income incomeCreate)
         {

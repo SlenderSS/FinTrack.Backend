@@ -44,7 +44,7 @@ namespace FinTrack.Api.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(422)]
-        public async Task<IActionResult> CreateExpenseCategory([FromQuery] int userId, [FromBody] ReadExpenseCategoryDto expenseCategoryCreate)
+        public async Task<IActionResult> CreateExpenseCategory([FromQuery] int userId, [FromBody] CreateExpenseCategoryDto expenseCategoryCreate)
         {
             if (expenseCategoryCreate == null)
                 return BadRequest(ModelState);

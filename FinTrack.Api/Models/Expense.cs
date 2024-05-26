@@ -9,8 +9,8 @@ public class Expense : NamedEntity
     public DateTime ExpenseDate { get; set; }
     public int BudgetId { get; set; }
     public required Budget Budget { get; set; }
-    public int ExpenceCategoryId { get; set; }
-    public required ExpenseCategory ExpenseCategory { get; set; }
+    public int? ExpenseCategoryId { get; set; }
+    public ExpenseCategory? ExpenseCategory { get; set; }
 
 
 }
