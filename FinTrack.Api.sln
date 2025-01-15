@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinTrack.Api", "FinTrack.Api\FinTrack.Api.csproj", "{8BC485C2-2411-4F50-86ED-C230B1A64EFD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinTrack.Client", "..\FinTrack.Client\FinTrack.Client\FinTrack.Client.csproj", "{FBFFF109-BA6E-4F28-AE36-D33ACFA6F9BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{8BC485C2-2411-4F50-86ED-C230B1A64EFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BC485C2-2411-4F50-86ED-C230B1A64EFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BC485C2-2411-4F50-86ED-C230B1A64EFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBFFF109-BA6E-4F28-AE36-D33ACFA6F9BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBFFF109-BA6E-4F28-AE36-D33ACFA6F9BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBFFF109-BA6E-4F28-AE36-D33ACFA6F9BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBFFF109-BA6E-4F28-AE36-D33ACFA6F9BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
