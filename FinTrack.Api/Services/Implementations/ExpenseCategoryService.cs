@@ -43,7 +43,7 @@ namespace FinTrack.Api.Services.Implementations
         public async Task<Result<IReadOnlyList<ExpenseCategory>>> GetExpenseCategoriesAsync(int userId)
         {
             
-            var expenseCategoriesByUser = await _expenseCategoryRepository.GetListAsync(userId);
+            var expenseCategoriesByUser = await _expenseCategoryRepository.GetListAsync(new User { Name = " ", Id = userId});
 
             var combinedCategories =  (await _expenseCategoryRepository.GetListAsync())
                   .Where(x => x.UserId == null)

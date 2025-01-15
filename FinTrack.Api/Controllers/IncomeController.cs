@@ -51,7 +51,7 @@ namespace FinTrack.Api.Controllers
 
             var budget = await _budgetService.GetBudgetAsync(budgetId);
 
-            category.Budget = budget.Value;
+            category.BudgetId = budgetId ;
 
             var result = await _incomeService.CreateIncomeAsync(category);
             if (result.IsFailure)
@@ -63,19 +63,5 @@ namespace FinTrack.Api.Controllers
             return Ok();
         }
 
-
-        [HttpGet("{incomeId}")]
-        [ProducesResponseType(200, Type = typeof(ReadIncomeDto))]
-        [ProducesResponseType(400)]
-        public async Task<IActionResult> GetIncome(int incomeId)
-        {
-            var incomeMap = _mapper.Map<ReadIncomeDto>(await _incomeService.GetIncomeAsync(incomeId));
-            if(!ModelState.IsValid) 
-            { 
-                return BadRequest(ModelState);
-            }
-            return Ok(incomeMap);
-
-        }
     }
 }

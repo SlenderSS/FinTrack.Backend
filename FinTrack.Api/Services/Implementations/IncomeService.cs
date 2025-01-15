@@ -38,7 +38,7 @@ namespace FinTrack.Api.Services.Implementations
             if (!await _budgetRepository.IsItemExistsAsync(budgetId))
                 return Result.Failure<IReadOnlyList<Income>>("Incorrect budget Id");
 
-            var incomes = await _incomesRepository.GetListAsync(budgetId);
+            var incomes = await _incomesRepository.GetListAsync(new Budget() { Id = budgetId, Name = "" });
 
             if (incomes == null)
                 return Result.Failure<IReadOnlyList<Income>>("There are no incomes in this budget");

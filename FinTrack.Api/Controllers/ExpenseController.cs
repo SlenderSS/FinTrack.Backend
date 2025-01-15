@@ -76,18 +76,6 @@ namespace FinTrack.Api.Controllers
         }
 
 
-        [HttpGet("{expenseId}")]
-        [ProducesResponseType(200, Type = typeof(ReadExpenseDto))]
-        [ProducesResponseType(400)]
-        public async Task<IActionResult> GetExpense(int expenseId)
-        {
-            var expenseMap = _mapper.Map<ReadExpenseDto>(await _expenseService.GetExpenseAsync(expenseId));
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            return Ok(expenseMap);
 
-        }
     }
 }

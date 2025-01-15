@@ -49,7 +49,7 @@ namespace FinTrack.Api.Services.Implementations
                   .ToList()
                   .AsReadOnly();
 
-            return Result.Success<IReadOnlyList<IncomeCategory>>(incomeCategoriesByUser);
+            return Result.Success<IReadOnlyList<IncomeCategory>>(combinedCategories);
         }
 
 
